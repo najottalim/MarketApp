@@ -1,0 +1,34 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SamidApp.Api", "SamidApp.Api\SamidApp.Api.csproj", "{17099EBE-5E2D-43D9-81E0-390FD934784C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SamidApp.Domain", "SamidApp.Domain\SamidApp.Domain.csproj", "{97C0784E-959A-42D3-85D4-FC0947801566}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SamidApp.Data", "SamidApp.Data\SamidApp.Data.csproj", "{79564D38-47C6-47EF-A69C-30DBB4188CEF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SamidApp.Service", "SamidApp.Service\SamidApp.Service.csproj", "{3F50F716-720F-4F78-803D-7DFC7308F3A2}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{17099EBE-5E2D-43D9-81E0-390FD934784C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{17099EBE-5E2D-43D9-81E0-390FD934784C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{17099EBE-5E2D-43D9-81E0-390FD934784C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{17099EBE-5E2D-43D9-81E0-390FD934784C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{97C0784E-959A-42D3-85D4-FC0947801566}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{97C0784E-959A-42D3-85D4-FC0947801566}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{97C0784E-959A-42D3-85D4-FC0947801566}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{97C0784E-959A-42D3-85D4-FC0947801566}.Release|Any CPU.Build.0 = Release|Any CPU
+		{79564D38-47C6-47EF-A69C-30DBB4188CEF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{79564D38-47C6-47EF-A69C-30DBB4188CEF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{79564D38-47C6-47EF-A69C-30DBB4188CEF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{79564D38-47C6-47EF-A69C-30DBB4188CEF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3F50F716-720F-4F78-803D-7DFC7308F3A2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3F50F716-720F-4F78-803D-7DFC7308F3A2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3F50F716-720F-4F78-803D-7DFC7308F3A2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3F50F716-720F-4F78-803D-7DFC7308F3A2}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
