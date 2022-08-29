@@ -29,13 +29,7 @@ public class ProductsController : ControllerBase
 
     [HttpGet("{Id}")]
     public async ValueTask<IActionResult> GetAsync([FromRoute(Name = "Id")] long id)
-    {
-        var product = await _productService.GetAsync(p => p.Id == id);
-        if (product is null)
-            return StatusCode(StatusCodes.Status404NotFound, "Product not found");
-
-        return StatusCode(200, product);
-    }
+        => Ok(await _productService.GetAsync(p => p.Id == id));
 
     [HttpPost]
     public async Task<ActionResult<Product>> AddAsync(ProductForCreationDto dto)
@@ -59,7 +53,7 @@ public class ProductsController : ControllerBase
         => Ok(await _productService.AddCategoryAsync(name));
 
     [HttpGet("Categories")]
-    public async Task<ActionResult<IEnumerable<ProductCategory>>> GetAllCategoryAsync([FromQuery]PaginationParams @params)
+    public async Task<IActionResult> GetAllCategoryAsync([FromQuery]PaginationParams @params)
         => Ok(await _productService.GetAllCategoryWithProductsAsync(@params));
 
     [HttpGet("Categories/{Id}")]

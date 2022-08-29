@@ -5,6 +5,7 @@ using SamidApp.Data.IRepositories;
 using SamidApp.Domain.Configurations;
 using SamidApp.Domain.Entities.Products;
 using SamidApp.Service.DTOs;
+using SamidApp.Service.Exceptions;
 using SamidApp.Service.Helpers;
 using SamidApp.Service.Interfaces;
 
@@ -58,9 +59,7 @@ public partial class ProductService : IProductService
     {
         var product = await _productRepository.GetAsync(p => p.Id == id);
         if (product is null)
-        {
-            throw new Exception("Product not found");
-        }
+            throw new MarketException(404, "Product not found");
 
         var mappedProduct = _mapper.Map(dto, product);
         var updatedProduct = await _productRepository.UpdateAsync(mappedProduct);
@@ -73,9 +72,7 @@ public partial class ProductService : IProductService
     {
         var product = await _productRepository.GetAsync(expression);
         if (product is null)
-        {
-            return false;
-        }
+            throw new MarketException(404, "Product not found");
 
         await _productRepository.DeleteAsync(expression);
         await _productRepository.SaveChangesAsync();
