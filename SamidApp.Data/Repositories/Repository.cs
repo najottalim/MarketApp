@@ -53,9 +53,4 @@ public abstract class Repository<TSource> : IRepository<TSource> where TSource :
         
         _dbSet.Remove(entity);
     }
-
-    public async Task SaveChangesAsync()
-    {
-        await _dbContext.SaveChangesAsync();
-    }
 }

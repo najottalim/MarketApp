@@ -13,32 +13,31 @@ namespace SamidApp.Service.Services;
 
 public partial class ProductService : IProductService
 {
-    private readonly IProductRepository _productRepository;
+    private readonly IUnitOfWork _unitOfWork;
     private readonly IMapper _mapper;
-    public ProductService(IProductRepository productRepository, IMapper mapper, IProductCategoryRepository productCategoryRepository)
+    public ProductService(IUnitOfWork unitOfWork, IMapper mapper)
     {
-        _productRepository = productRepository;
+        _unitOfWork = unitOfWork;
         _mapper = mapper;
-        _productCategoryRepository = productCategoryRepository;
     }
     
     public async Task<IEnumerable<Product>> GetAllAsync(PaginationParams @params, Expression<Func<Product, bool>> expression = null)
     {
-        var pagedList = _productRepository.GetAll(expression,  isTracking: false).ToPagedList(@params);
+        var pagedList = _unitOfWork.Products.GetAll(expression,  isTracking: false).ToPagedList(@params);
 
         return await pagedList.ToListAsync();
     }
 
     public async Task<IEnumerable<Product>> GetAllWithCategoriesAsync(PaginationParams @params, Expression<Func<Product, bool>> expression = null)
     {
-        var pagedList = _productRepository.GetAll(expression, "Category", false).ToPagedList(@params);
+        var pagedList = _unitOfWork.Products.GetAll(expression, "Category", false).ToPagedList(@params);
 
         return await pagedList.ToListAsync();
     }
 
     public async Task<Product> GetAsync(Expression<Func<Product, bool>> expression = null)
     {
-        return await _productRepository.GetAsync(expression);
+        return await _unitOfWork.Products.GetAsync(expression);
     }
 
     public async Task<Product> AddAsync(ProductForCreationDto dto)
@@ -48,34 +47,34 @@ public partial class ProductService : IProductService
         
         // mapping
         var mappedProduct = _mapper.Map<Product>(dto);
-        var product = await _productRepository.AddAsync(mappedProduct);
+        var product = await _unitOfWork.Products.AddAsync(mappedProduct);
 
-        await _productRepository.SaveChangesAsync();
+        await _unitOfWork.SaveChangesAsync();
 
         return product;
     }
 
     public async Task<Product> UpdateAsync(long id, ProductForCreationDto dto)
     {
-        var product = await _productRepository.GetAsync(p => p.Id == id);
+        var product = await _unitOfWork.Products.GetAsync(p => p.Id == id);
         if (product is null)
             throw new MarketException(404, "Product not found");
 
         var mappedProduct = _mapper.Map(dto, product);
-        var updatedProduct = await _productRepository.UpdateAsync(mappedProduct);
-        await _productRepository.SaveChangesAsync();
+        var updatedProduct = await _unitOfWork.Products.UpdateAsync(mappedProduct);
+        await _unitOfWork.SaveChangesAsync();
 
         return updatedProduct;
     }
 
     public async Task<bool> DeleteAsync(Expression<Func<Product, bool>> expression)
     {
-        var product = await _productRepository.GetAsync(expression);
+        var product = await _unitOfWork.Products.GetAsync(expression);
         if (product is null)
             throw new MarketException(404, "Product not found");
 
-        await _productRepository.DeleteAsync(expression);
-        await _productRepository.SaveChangesAsync();
+        await _unitOfWork.Products.DeleteAsync(expression);
+        await _unitOfWork.SaveChangesAsync();
 
         return true;
     }

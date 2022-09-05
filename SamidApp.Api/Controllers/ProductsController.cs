@@ -1,6 +1,4 @@
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using SamidApp.Data.DbContexts;
 using SamidApp.Domain.Configurations;
 using SamidApp.Domain.Entities.Products;
 using SamidApp.Service.DTOs;

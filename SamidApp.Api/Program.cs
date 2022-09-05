@@ -1,5 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json;
+using SamidApp.Api.Extensions;
 using SamidApp.Data.DbContexts;
 using SamidApp.Data.IRepositories;
 using SamidApp.Data.Repositories;
@@ -19,11 +20,7 @@ builder.Services.AddDbContext<MarketDbContext>(options =>
 builder.Services.AddAutoMapper(typeof(MapperProfile));
 
 // Custom services
-builder.Services.AddScoped<IProductRepository, ProductRepository>();
-builder.Services.AddScoped<IProductCategoryRepository, ProductCategoryRepository>();
-
-builder.Services.AddScoped<IProductService, ProductService>();
-
+builder.Services.AddCustomServices();
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
