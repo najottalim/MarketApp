@@ -30,7 +30,7 @@ public class ProductsController : ControllerBase
         => Ok(await _productService.GetAsync(p => p.Id == id));
 
     [HttpPost]
-    public async Task<ActionResult<Product>> AddAsync(ProductForCreationDto dto)
+    public async Task<ActionResult<Product>> AddAsync([FromForm]ProductForCreationDto dto)
         => Ok(await _productService.AddAsync(dto));
 
     [HttpPut("{Id}")]

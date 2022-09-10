@@ -11,5 +11,6 @@ public static class ServiceExtensions
     {
         services.AddScoped<IUnitOfWork, UnitOfWork>();
         services.AddScoped<IProductService, ProductService>();
+        services.AddScoped<IAttachmentService, AttachmentService>();
     }
 }

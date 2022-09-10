@@ -6,7 +6,7 @@ using SamidApp.Data.IRepositories;
 namespace SamidApp.Data.Repositories;
 
 #pragma warning disable
-public abstract class Repository<TSource> : IRepository<TSource> where TSource : class
+public class Repository<TSource> : IRepository<TSource> where TSource : class
 {
     protected readonly MarketDbContext _dbContext;
     protected readonly DbSet<TSource> _dbSet;

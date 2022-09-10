@@ -1,9 +1,11 @@
 using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json;
 using SamidApp.Api.Extensions;
+using SamidApp.Api.Middlewares;
 using SamidApp.Data.DbContexts;
 using SamidApp.Data.IRepositories;
 using SamidApp.Data.Repositories;
+using SamidApp.Service.Helpers;
 using SamidApp.Service.Interfaces;
 using SamidApp.Service.Mappers;
 using SamidApp.Service.Services;
@@ -35,7 +37,13 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
+EnvironmentHelper.WebRootPath = app.Services.GetService<IWebHostEnvironment>()?.WebRootPath;
+
+app.UseMiddleware<MarketExceptionMiddleware>();
+
 app.UseHttpsRedirection();
+
+app.UseStaticFiles();
 
 app.UseAuthorization();
 

@@ -1,4 +1,5 @@
 using SamidApp.Domain.Commons;
+using SamidApp.Domain.Entities.Commons;
 
 namespace SamidApp.Domain.Entities.Products;
 
@@ -9,4 +10,7 @@ public class Product : Auditable<long>
     
     public long CategoryId { get; set; }
     public ProductCategory Category { get; set; }
+    
+    public long? FileId { get; set; }
+    public Attachment File { get; set; } 
 }

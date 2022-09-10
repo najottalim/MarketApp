@@ -15,10 +15,12 @@ public partial class ProductService : IProductService
 {
     private readonly IUnitOfWork _unitOfWork;
     private readonly IMapper _mapper;
-    public ProductService(IUnitOfWork unitOfWork, IMapper mapper)
+    private readonly IAttachmentService _attachmentService;
+    public ProductService(IUnitOfWork unitOfWork, IMapper mapper, IAttachmentService attachmentService)
     {
         _unitOfWork = unitOfWork;
         _mapper = mapper;
+        _attachmentService = attachmentService;
     }
     
     public async Task<IEnumerable<Product>> GetAllAsync(PaginationParams @params, Expression<Func<Product, bool>> expression = null)
@@ -37,18 +39,23 @@ public partial class ProductService : IProductService
 
     public async Task<Product> GetAsync(Expression<Func<Product, bool>> expression = null)
     {
-        return await _unitOfWork.Products.GetAsync(expression);
+        var product = await _unitOfWork.Products.GetAsync(expression);
+        if (product is null)
+            throw new MarketException(404, "Product not found");
+        
+        return product;
     }
 
     public async Task<Product> AddAsync(ProductForCreationDto dto)
     {
         // check for exist .. any code
-        // ...
+        var attachment = await _attachmentService.UploadAsync(dto.File.OpenReadStream(), dto.File.FileName);
         
         // mapping
         var mappedProduct = _mapper.Map<Product>(dto);
         var product = await _unitOfWork.Products.AddAsync(mappedProduct);
-
+        product.FileId = attachment.Id;
+        
         await _unitOfWork.SaveChangesAsync();
 
         return product;
@@ -70,8 +77,8 @@ public partial class ProductService : IProductService
     public async Task<bool> DeleteAsync(Expression<Func<Product, bool>> expression)
     {
         var product = await _unitOfWork.Products.GetAsync(expression);
-        if (product is null)
-            throw new MarketException(404, "Product not found");
+        
+        product.Name = "asdasd";
 
         await _unitOfWork.Products.DeleteAsync(expression);
         await _unitOfWork.SaveChangesAsync();
