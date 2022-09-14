@@ -6,9 +6,7 @@ using SamidApp.Service.Interfaces;
 
 namespace SamidApp.Api.Controllers;
 
-[ApiController]
-[Route("[controller]")]
-public class ProductsController : ControllerBase
+public class ProductsController : BaseController
 {
     private readonly IProductService _productService;
     public ProductsController(IProductService productService)

@@ -8,12 +8,14 @@
 
     <ItemGroup>
         <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="11.0.0" />
+        <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="6.0.9" />
         <PackageReference Include="Microsoft.EntityFrameworkCore" Version="6.0.8" />
         <PackageReference Include="microsoft.entityframeworkcore.design" Version="6.0.8">
           <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
           <PrivateAssets>all</PrivateAssets>
         </PackageReference>
         <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="6.0.8" />
+        <PackageReference Include="Serilog.AspNEtCore" Version="6.0.1" />
         <PackageReference Include="Swashbuckle.AspNetCore" Version="6.2.3" />
         <PackageReference Include="Swashbuckle.AspNetCore.Newtonsoft" Version="6.4.0" />
     </ItemGroup>
@@ -24,6 +26,7 @@
     </ItemGroup>
 
     <ItemGroup>
+      <Folder Include="Logs" />
       <Folder Include="wwwroot\files" />
       <Folder Include="wwwroot\images" />
       <Folder Include="wwwroot\js" />
