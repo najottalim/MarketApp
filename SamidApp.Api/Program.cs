@@ -24,13 +24,13 @@ builder.Services.AddAutoMapper(typeof(MapperProfile));
 
 // Jwt
 builder.Services.AddJwtService(builder.Configuration);
-
+builder.Services.AddHttpContextAccessor();
 // Custom services
 builder.Services.AddCustomServices();
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
+builder.Services.AddSwaggerService();
 
 // Serilog
 var logger = new LoggerConfiguration()
@@ -50,7 +50,11 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
+// get services
 EnvironmentHelper.WebRootPath = app.Services.GetService<IWebHostEnvironment>()?.WebRootPath;
+
+if(app.Services.GetService<IHttpContextAccessor>() != null)
+    HttpContextHelper.Accessor = app.Services.GetRequiredService<IHttpContextAccessor>();
 
 app.UseMiddleware<MarketExceptionMiddleware>();
 

@@ -1,12 +1,12 @@
 namespace SamidApp.Domain.Commons;
 
 #pragma warning disable
-public class Auditable<T> 
+public abstract class Auditable
 {
-    public T Id { get; set; }
+    public long Id { get; set; }
     public DateTime CreatedAt { get; set; }
     public DateTime? UpdatedAt { get; set; }
-    public T? CreatedBy { get; set; }
-    public T? UpdatedBy { get; set; }
-    public T? DeletedBy { get; set; }
+    public long? CreatedBy { get; set; }
+    public long? UpdatedBy { get; set; }
+    public long? DeletedBy { get; set; }
 }

@@ -3,7 +3,7 @@ using SamidApp.Domain.Enums;
 
 namespace SamidApp.Domain.Entities.Users;
 
-public class User : Auditable<long>
+public class User : Auditable
 {
     public string FirstName { get; set; }
     public string LastName { get; set; }

@@ -2,7 +2,7 @@ using SamidApp.Domain.Commons;
 
 namespace SamidApp.Domain.Entities.Commons;
 
-public class Attachment : Auditable<long>
+public class Attachment : Auditable
 {
     /// <summary>
     /// botirali.png

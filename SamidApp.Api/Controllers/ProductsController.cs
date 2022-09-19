@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using SamidApp.Domain.Configurations;
 using SamidApp.Domain.Entities.Products;
@@ -6,6 +7,7 @@ using SamidApp.Service.Interfaces;
 
 namespace SamidApp.Api.Controllers;
 
+[Authorize]
 public class ProductsController : BaseController
 {
     private readonly IProductService _productService;
@@ -19,11 +21,11 @@ public class ProductsController : BaseController
     /// </summary>
     /// <param name="params"></param>
     /// <returns></returns>
-    [HttpGet]
+    [HttpGet, AllowAnonymous]
     public async ValueTask<IActionResult> GetAllAsync([FromQuery] PaginationParams @params)
         => Ok(await _productService.GetAllWithCategoriesAsync(@params));
 
-    [HttpGet("{Id}")]
+    [HttpGet("{Id}"), AllowAnonymous]
     public async ValueTask<IActionResult> GetAsync([FromRoute(Name = "Id")] long id)
         => Ok(await _productService.GetAsync(p => p.Id == id));
 
@@ -32,7 +34,7 @@ public class ProductsController : BaseController
         => Ok(await _productService.AddAsync(dto));
 
     [HttpPut("{Id}")]
-    public async Task<ActionResult<Product>> UpdateAsync([FromRoute(Name = "Id")] long id, ProductForCreationDto dto)
+    public async Task<ActionResult<Product>> UpdateAsync([FromRoute(Name = "Id")] long id, [FromForm]ProductForCreationDto dto)
         => Ok(await _productService.UpdateAsync(id, dto));
 
     [HttpDelete("{Id}")]
@@ -44,23 +46,23 @@ public class ProductsController : BaseController
     /// </summary>
     /// <param name="name"></param>
     /// <returns></returns>
-    [HttpPost("Categories")]
+    [HttpPost("Categories"), Authorize(Roles = "Admin")]
     public async Task<ActionResult<ProductCategory>> AddCategoryAsync([FromBody] string name)
         => Ok(await _productService.AddCategoryAsync(name));
 
-    [HttpGet("Categories")]
+    [HttpGet("Categories"), AllowAnonymous]
     public async Task<IActionResult> GetAllCategoryAsync([FromQuery]PaginationParams @params)
         => Ok(await _productService.GetAllCategoryWithProductsAsync(@params));
 
-    [HttpGet("Categories/{Id}")]
+    [HttpGet("Categories/{Id}"), AllowAnonymous]
     public async Task<ActionResult<ProductCategory>> GetCategoryAsync([FromRoute(Name = "Id")] long id)
         => Ok(await _productService.GetCategoryAsync(p => p.Id == id));
 
-    [HttpPut("Categories/{Id}")]
+    [HttpPut("Categories/{Id}"), Authorize(Roles = "Admin")]
     public async Task<ActionResult<ProductCategory>> UpdateCategoryAsync([FromRoute(Name = "Id")] long id, string name)
         => Ok(await _productService.UpdateCategoryAsync(id, name));
 
-    [HttpDelete("Categories/{Id}")]
+    [HttpDelete("Categories/{Id}"), Authorize(Roles = "Admin")]
     public async Task<ActionResult<bool>> DeleteCategoryAsync([FromRoute(Name = "Id")] long id)
         => Ok(await _productService.DeleteCategoryAsync(p => p.Id == id));
 

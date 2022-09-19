@@ -6,6 +6,7 @@ using SamidApp.Domain.Configurations;
 using SamidApp.Domain.Entities.Products;
 using SamidApp.Service.DTOs;
 using SamidApp.Service.Exceptions;
+using SamidApp.Service.Extensions;
 using SamidApp.Service.Helpers;
 using SamidApp.Service.Interfaces;
 
@@ -68,6 +69,8 @@ public partial class ProductService : IProductService
             throw new MarketException(404, "Product not found");
 
         var mappedProduct = _mapper.Map(dto, product);
+        mappedProduct.Update();
+        
         var updatedProduct = await _unitOfWork.Products.UpdateAsync(mappedProduct);
         await _unitOfWork.SaveChangesAsync();
 
@@ -76,10 +79,14 @@ public partial class ProductService : IProductService
 
     public async Task<bool> DeleteAsync(Expression<Func<Product, bool>> expression)
     {
-        var product = await _unitOfWork.Products.GetAsync(expression);
+        var query = _unitOfWork.Products.GetAll(expression);
+        var product = query.FirstOrDefault(p => p.CreatedBy == HttpContextHelper.UserId || HttpContextHelper.UserRole == "Admin");
         
-        product.Name = "asdasd";
+        if (product is null)
+            throw new MarketException(404, "Product not found");
 
+        product.Delete();
+        
         await _unitOfWork.Products.DeleteAsync(expression);
         await _unitOfWork.SaveChangesAsync();
 

@@ -33,10 +33,10 @@ namespace SamidApp.Data.Migrations
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("datetime2");
 
-                    b.Property<long>("CreatedBy")
+                    b.Property<long?>("CreatedBy")
                         .HasColumnType("bigint");
 
-                    b.Property<long>("DeletedBy")
+                    b.Property<long?>("DeletedBy")
                         .HasColumnType("bigint");
 
                     b.Property<string>("Name")
@@ -48,7 +48,7 @@ namespace SamidApp.Data.Migrations
                     b.Property<DateTime?>("UpdatedAt")
                         .HasColumnType("datetime2");
 
-                    b.Property<long>("UpdatedBy")
+                    b.Property<long?>("UpdatedBy")
                         .HasColumnType("bigint");
 
                     b.HasKey("Id");
@@ -70,10 +70,10 @@ namespace SamidApp.Data.Migrations
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("datetime2");
 
-                    b.Property<long>("CreatedBy")
+                    b.Property<long?>("CreatedBy")
                         .HasColumnType("bigint");
 
-                    b.Property<long>("DeletedBy")
+                    b.Property<long?>("DeletedBy")
                         .HasColumnType("bigint");
 
                     b.Property<long?>("FileId")
@@ -88,7 +88,7 @@ namespace SamidApp.Data.Migrations
                     b.Property<DateTime?>("UpdatedAt")
                         .HasColumnType("datetime2");
 
-                    b.Property<long>("UpdatedBy")
+                    b.Property<long?>("UpdatedBy")
                         .HasColumnType("bigint");
 
                     b.HasKey("Id");
@@ -111,10 +111,10 @@ namespace SamidApp.Data.Migrations
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("datetime2");
 
-                    b.Property<long>("CreatedBy")
+                    b.Property<long?>("CreatedBy")
                         .HasColumnType("bigint");
 
-                    b.Property<long>("DeletedBy")
+                    b.Property<long?>("DeletedBy")
                         .HasColumnType("bigint");
 
                     b.Property<string>("Name")
@@ -123,7 +123,7 @@ namespace SamidApp.Data.Migrations
                     b.Property<DateTime?>("UpdatedAt")
                         .HasColumnType("datetime2");
 
-                    b.Property<long>("UpdatedBy")
+                    b.Property<long?>("UpdatedBy")
                         .HasColumnType("bigint");
 
                     b.HasKey("Id");
@@ -142,10 +142,10 @@ namespace SamidApp.Data.Migrations
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("datetime2");
 
-                    b.Property<long>("CreatedBy")
+                    b.Property<long?>("CreatedBy")
                         .HasColumnType("bigint");
 
-                    b.Property<long>("DeletedBy")
+                    b.Property<long?>("DeletedBy")
                         .HasColumnType("bigint");
 
                     b.Property<string>("FirstName")
@@ -169,7 +169,7 @@ namespace SamidApp.Data.Migrations
                     b.Property<DateTime?>("UpdatedAt")
                         .HasColumnType("datetime2");
 
-                    b.Property<long>("UpdatedBy")
+                    b.Property<long?>("UpdatedBy")
                         .HasColumnType("bigint");
 
                     b.HasKey("Id");

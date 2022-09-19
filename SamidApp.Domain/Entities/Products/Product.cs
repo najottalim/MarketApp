@@ -3,7 +3,7 @@ using SamidApp.Domain.Entities.Commons;
 
 namespace SamidApp.Domain.Entities.Products;
 
-public class Product : Auditable<long>
+public class Product : Auditable
 {
     public string Name { get; set; }
     public decimal Price { get; set; }
